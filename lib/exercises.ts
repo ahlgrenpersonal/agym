@@ -74,8 +74,8 @@ export const DEFAULT_EXERCISES: ExerciseDefinition[] = [
   },
   {
     "id": "seated_leg_curl",
-    "workoutType": "wednesday",
-    "order": 0,
+    "workoutType": "monday",
+    "order": 1,
     "name": "Seated Leg Curl",
     "minReps": 10,
     "maxReps": 15,
@@ -86,7 +86,7 @@ export const DEFAULT_EXERCISES: ExerciseDefinition[] = [
   },
   {
     "id": "abdominal_crunch_machine",
-    "workoutType": "friday",
+    "workoutType": "thursday",
     "order": 0,
     "name": "Ab Crunch",
     "minReps": 10,
@@ -98,7 +98,7 @@ export const DEFAULT_EXERCISES: ExerciseDefinition[] = [
   },
   {
     "id": "hip_abduction",
-    "workoutType": "friday",
+    "workoutType": "thursday",
     "order": 1,
     "name": "Outer Hips · Knees Apart",
     "minReps": 12,
@@ -110,7 +110,7 @@ export const DEFAULT_EXERCISES: ExerciseDefinition[] = [
   },
   {
     "id": "hip_adduction",
-    "workoutType": "friday",
+    "workoutType": "thursday",
     "order": 2,
     "name": "Inner Thighs · Knees Together",
     "minReps": 12,

@@ -2,7 +2,7 @@
   "id": "/agym/",
   "name": "AGym · Gym Tracker",
   "short_name": "AGym",
-  "description": "AGym’s three-day legs and abs workout tracker.",
+  "description": "AGym’s two-day legs and abs workout tracker.",
   "start_url": "/agym/",
   "scope": "/agym/",
   "display": "standalone",

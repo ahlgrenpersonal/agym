@@ -40,6 +40,13 @@ export async function ensureDefaults(database: WorkoutDatabase = db): Promise<vo
       if (missing.length) {
         await database.exercises.bulkAdd(missing.map((item) => ({ ...item })));
       }
+      // Move only current exercise assignments; preserve custom loads, sets, rests, and historical sessions.
+      for (const planned of DEFAULT_EXERCISES) {
+        const current = await database.exercises.get(planned.id);
+        if (current && (current.workoutType !== planned.workoutType || current.order !== planned.order)) {
+          await database.exercises.update(planned.id, { workoutType: planned.workoutType, order: planned.order });
+        }
+      }
       if (!(await database.settings.get("settings"))) {
         await database.settings.add({ ...DEFAULT_SETTINGS });
       }

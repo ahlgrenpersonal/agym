@@ -8,14 +8,13 @@ export interface RoutinePreset {
  workouts: Partial<Record<WorkoutType, RoutineWorkout>>;
 }
 export const ROUTINE_PRESETS: Record<string, RoutinePreset> = {
- agym_three_day: {
-  name: "AGym's Three-Day Routine",
-  weeklySummary: "MON · LEGS / WED · HAMSTRINGS / FRI · ABS + HIPS",
-  workoutTypes: ["monday", "wednesday", "friday"],
+ agym_two_day: {
+  name: "AGym's Two-Day Routine",
+  weeklySummary: "MON · LEGS / THU · ABS + HIPS",
+  workoutTypes: ["monday", "thursday"],
   workouts: {
-   monday: { description: "Leg press area · front thighs + glutes · 10–15 min", entries: [{exerciseId:"leg_press",station:"leg_press"}] },
-   wednesday: { description: "Main area · back of thighs · 12–18 min", entries: [{exerciseId:"seated_leg_curl",station:"seated_leg_curl"}] },
-   friday: { description: "Main area · abs + outer hips + inner thighs · 20–25 min", entries: [
+   monday: { description: "2 machines · front + back thighs · glutes · 20–25 min", entries: [{exerciseId:"leg_press",station:"leg_press"}, {exerciseId:"seated_leg_curl",station:"seated_leg_curl"}] },
+   thursday: { description: "2 machines · abs + outer hips + inner thighs · 20–25 min", entries: [
     {exerciseId:"abdominal_crunch_machine",station:"abdominal_crunch_machine"},
     {exerciseId:"hip_abduction",station:"hip_abduction_adduction"},
     {exerciseId:"hip_adduction",station:"hip_abduction_adduction"}
@@ -24,7 +23,7 @@ export const ROUTINE_PRESETS: Record<string, RoutinePreset> = {
  }
 };
 export type RoutinePresetId = keyof typeof ROUTINE_PRESETS;
-export const ACTIVE_ROUTINE_ID: RoutinePresetId = "agym_three_day";
+export const ACTIVE_ROUTINE_ID: RoutinePresetId = "agym_two_day";
 export const ACTIVE_ROUTINE = ROUTINE_PRESETS[ACTIVE_ROUTINE_ID];
 export const ACTIVE_WORKOUT_TYPES = ACTIVE_ROUTINE.workoutTypes;
 export function routineWorkout(type: WorkoutType): RoutineWorkout | undefined { return ACTIVE_ROUTINE.workouts[type]; }

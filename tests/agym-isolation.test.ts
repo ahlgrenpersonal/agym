@@ -10,11 +10,25 @@ import { DEFAULT_EXERCISES, workoutExercises } from "../lib/exercises";
 import { defaultStartingWeight } from "../lib/starting-weight";
 
 describe("AGym schedule and independence", () => {
+ it("moves saved exercise definitions to the new days without changing custom settings or history", async () => {
+  const database = new WorkoutDatabase("schedule-update");
+  try {
+   await ensureDefaults(database);
+   await database.exercises.update("seated_leg_curl", { workoutType: "wednesday", targetSets: 2, restSeconds: 105 });
+   await database.exercises.update("hip_adduction", { workoutType: "friday", targetSets: 1 });
+   const session = { id: "old-session", workoutType: "wednesday" as const, status: "completed" as const, startTimestamp: 100, exerciseOrder: ["seated_leg_curl"] };
+   await database.sessions.add(session);
+   await ensureDefaults(database);
+   expect(await database.exercises.get("seated_leg_curl")).toMatchObject({ workoutType: "monday", order: 1, targetSets: 2, restSeconds: 105 });
+   expect(await database.exercises.get("hip_adduction")).toMatchObject({ workoutType: "thursday", targetSets: 1 });
+   expect(await database.sessions.get("old-session")).toEqual(session);
+  } finally { await database.delete(); }
+ });
+
  it("provides exactly the agreed routine with no inherited starting loads", () => {
-  expect(ACTIVE_WORKOUT_TYPES).toEqual(["monday","wednesday","friday"]);
+  expect(ACTIVE_WORKOUT_TYPES).toEqual(["monday","thursday"]);
   expect(ACTIVE_WORKOUT_TYPES.map(day => workoutExercises(DEFAULT_EXERCISES,day).map(e=>[e.id,e.targetSets,e.minReps,e.maxReps,e.restSeconds]))).toEqual([
-   [["leg_press",3,10,15,120]],
-   [["seated_leg_curl",4,10,15,90]],
+   [["leg_press",3,10,15,120],["seated_leg_curl",4,10,15,90]],
    [["abdominal_crunch_machine",4,10,15,90],["hip_abduction",2,12,15,90],["hip_adduction",2,12,15,90]]
   ]);
   expect(DEFAULT_EXERCISES.every(e=>e.defaultWeightLb === undefined)).toBe(true);
@@ -59,7 +73,7 @@ describe("AGym schedule and independence", () => {
   runInNewContext(readFileSync("public/sw.js","utf8"),{
    URL,Response,
    self:{registration:{scope:"https://example.com/agym/"},location:{origin:"https://example.com"},addEventListener:(name:string,cb:(event:unknown)=>void)=>{listeners[name]=cb;},clients:{claim:async()=>{}},skipWaiting:()=>{}},
-   caches:{keys:async()=>["workout-shell-v23","unrelated-cache","agym-workout-shell-v0","agym-workout-shell-v1"],delete:async(key:string)=>{deleted.push(key);return true;}}
+   caches:{keys:async()=>["workout-shell-v23","unrelated-cache","agym-workout-shell-v0","agym-workout-shell-v2"],delete:async(key:string)=>{deleted.push(key);return true;}}
   });
   listeners.activate({waitUntil:(promise:Promise<unknown>)=>{pending=promise;}});
   await pending;
