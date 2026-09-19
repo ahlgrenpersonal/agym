@@ -446,8 +446,8 @@ export function WorkoutScreen({
             <p className="eyebrow">
               {weightSuggestionSource === "program_update"
                 ? "UPDATED START"
-                : usingDefaultWeight
-                  ? "STARTING WEIGHT"
+                : weightSuggestionSource === "starting_weight" || usingDefaultWeight
+                  ? "TRIAL STARTING WEIGHT"
                   : "RECOMMENDED"} · SET {currentSet}
             </p>
             <strong>
@@ -463,6 +463,10 @@ export function WorkoutScreen({
               <span>
                 Copied from set 2 of your most recent workout, or set 1 when it
                 was the only set. Edit freely.
+              </span>
+            ) : weightSuggestionSource === "starting_weight" ? (
+              <span>
+                Trial load, not a strength target. Aim for {current.minReps === 12 ? "13–14" : "12–13"} controlled reps with 2–3 left in reserve. Use the nearest lighter machine setting. If form breaks or you cannot reach the rep range, lower it; if 15 is easy, increase one small step. Log the actual load and reps.
               </span>
             ) : weightSuggestionSource === "program_update" ? (
               <span>

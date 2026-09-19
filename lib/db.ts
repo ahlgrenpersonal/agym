@@ -43,6 +43,9 @@ export async function ensureDefaults(database: WorkoutDatabase = db): Promise<vo
       // Move only current exercise assignments; preserve custom loads, sets, rests, and historical sessions.
       for (const planned of DEFAULT_EXERCISES) {
         const current = await database.exercises.get(planned.id);
+        if (current && current.defaultWeightLb === undefined && planned.defaultWeightLb !== undefined) {
+          await database.exercises.update(planned.id, { defaultWeightLb: planned.defaultWeightLb });
+        }
         if (current && (current.workoutType !== planned.workoutType || current.order !== planned.order)) {
           await database.exercises.update(planned.id, { workoutType: planned.workoutType, order: planned.order });
         }

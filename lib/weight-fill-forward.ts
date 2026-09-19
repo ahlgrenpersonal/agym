@@ -10,6 +10,7 @@ import { defaultStartingWeight } from "./starting-weight";
 export type WeightSuggestionSource =
   | "previous_set"
   | "previous_workout"
+  | "starting_weight"
   | "program_update"
   | "none";
 
@@ -84,7 +85,7 @@ export function fillForwardWeight({
   if (programIsInEffect && previousSessionPredatesProgram) {
     return {
       weight: defaultStartingWeight(displayUnit, programWeightLb),
-      source: "program_update",
+      source: programWeightEffectiveLocalDate ? "program_update" : "starting_weight",
     };
   }
 
