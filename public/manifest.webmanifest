@@ -1,0 +1,26 @@
+{
+  "id": "/agym/",
+  "name": "AGym · Gym Tracker",
+  "short_name": "AGym",
+  "description": "AGym’s three-day legs and abs workout tracker.",
+  "start_url": "/agym/",
+  "scope": "/agym/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#ffffff",
+  "theme_color": "#7c3aed",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
