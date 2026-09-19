@@ -62,7 +62,7 @@ export const RETIRED_EXERCISE_IDS: readonly string[] = [];
 export const DEFAULT_EXERCISES: ExerciseDefinition[] = [
   {
     "id": "leg_press",
-    "defaultWeightLb": 40,
+    "defaultWeightLb": 70,
     "workoutType": "monday",
     "order": 0,
     "name": "Leg Press",
@@ -75,7 +75,7 @@ export const DEFAULT_EXERCISES: ExerciseDefinition[] = [
   },
   {
     "id": "seated_leg_curl",
-    "defaultWeightLb": 20,
+    "defaultWeightLb": 40,
     "workoutType": "monday",
     "order": 1,
     "name": "Seated Leg Curl",
@@ -88,7 +88,7 @@ export const DEFAULT_EXERCISES: ExerciseDefinition[] = [
   },
   {
     "id": "abdominal_crunch_machine",
-    "defaultWeightLb": 10,
+    "defaultWeightLb": 40,
     "workoutType": "thursday",
     "order": 0,
     "name": "Ab Crunch",
@@ -101,7 +101,7 @@ export const DEFAULT_EXERCISES: ExerciseDefinition[] = [
   },
   {
     "id": "hip_abduction",
-    "defaultWeightLb": 20,
+    "defaultWeightLb": 40,
     "workoutType": "thursday",
     "order": 1,
     "name": "Outer Hips · Knees Apart",
@@ -114,7 +114,7 @@ export const DEFAULT_EXERCISES: ExerciseDefinition[] = [
   },
   {
     "id": "hip_adduction",
-    "defaultWeightLb": 20,
+    "defaultWeightLb": 40,
     "workoutType": "thursday",
     "order": 2,
     "name": "Inner Thighs · Knees Together",

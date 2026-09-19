@@ -27,6 +27,12 @@ export class WorkoutDatabase extends Dexie {
 }
 export const db = new WorkoutDatabase();
 
+// Superseded trial loads; upgrade these defaults while retaining other custom values.
+const PREVIOUS_TRIAL_WEIGHTS: Record<string, number> = {
+  leg_press: 40, seated_leg_curl: 20, abdominal_crunch_machine: 10,
+  hip_abduction: 20, hip_adduction: 20,
+};
+
 export async function ensureDefaults(database: WorkoutDatabase = db): Promise<void> {
   await database.open();
   await database.transaction(
@@ -43,7 +49,7 @@ export async function ensureDefaults(database: WorkoutDatabase = db): Promise<vo
       // Move only current exercise assignments; preserve custom loads, sets, rests, and historical sessions.
       for (const planned of DEFAULT_EXERCISES) {
         const current = await database.exercises.get(planned.id);
-        if (current && current.defaultWeightLb === undefined && planned.defaultWeightLb !== undefined) {
+        if (current && (current.defaultWeightLb === undefined || current.defaultWeightLb === PREVIOUS_TRIAL_WEIGHTS[planned.id]) && planned.defaultWeightLb !== undefined) {
           await database.exercises.update(planned.id, { defaultWeightLb: planned.defaultWeightLb });
         }
         if (current && (current.workoutType !== planned.workoutType || current.order !== planned.order)) {

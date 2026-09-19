@@ -15,8 +15,8 @@ it("backfills missing trial loads without replacing custom loads or workout snap
   await ensureDefaults(db);
   await ensureDefaults(db);
   expect(await db.exercises.get("leg_press")).toMatchObject({defaultWeightLb:55,restSeconds:150});
-  expect(await db.exercises.get("seated_leg_curl")).toMatchObject({defaultWeightLb:20});
-  expect(await db.exercises.get("abdominal_crunch_machine")).toMatchObject({defaultWeightLb:10});
+  expect(await db.exercises.get("seated_leg_curl")).toMatchObject({defaultWeightLb:40});
+  expect(await db.exercises.get("abdominal_crunch_machine")).toMatchObject({defaultWeightLb:40});
   expect(await db.sessions.get("active")).toEqual(session);
  } finally { await db.delete(); }
 });
@@ -30,4 +30,21 @@ it("uses trial loads only without history and carries actual loads forward in ei
  expect(fillForwardWeight({...args,displayUnit:"kg"})).toEqual({weight:18,source:"starting_weight"});
  expect(fillForwardWeight({...args,sets:[record]})).toEqual({weight:25,source:"previous_workout"});
  expect(fillForwardWeight({...args,sets:[{...record,sessionId:current.id}]})).toEqual({weight:25,source:"previous_set"});
+});
+
+
+it("upgrades the previous trial defaults on existing installations", async () => {
+ const db = new WorkoutDatabase("revised-trials");
+ try {
+  await ensureDefaults(db);
+  for (const [id, weight] of Object.entries({leg_press:40,seated_leg_curl:20,abdominal_crunch_machine:10,hip_abduction:20,hip_adduction:20})) {
+   await db.exercises.update(id, {defaultWeightLb:weight});
+  }
+  await ensureDefaults(db);
+  await ensureDefaults(db);
+  expect(await db.exercises.get("leg_press")).toMatchObject({defaultWeightLb:70});
+  for (const id of ["seated_leg_curl","abdominal_crunch_machine","hip_abduction","hip_adduction"]) {
+   expect(await db.exercises.get(id)).toMatchObject({defaultWeightLb:40});
+  }
+ } finally { await db.delete(); }
 });

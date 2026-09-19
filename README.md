@@ -7,7 +7,7 @@ Independent copy of the Workout PWA. Source is self-contained in this folder; no
 - Thursday: ab crunch, 4 × 10–15; hip abduction, 2 × 12–15; hip adduction, 2 × 12–15; rest 90 seconds.
 - Both sessions use two physical machines and take about 20–25 minutes including warm-up and rests. Abduction and adduction share one machine.
 - Start with 1–2 working sets per exercise in week one (editable in Settings before starting a workout). Warm up for 3–4 minutes and keep 2–3 reps in reserve.
-- Trial starting loads (machine stack labels): leg press 40 lb; seated leg curl 20 lb; ab crunch 10 lb; hip abduction and adduction 20 lb each. These are conservative estimates, not demographic strength averages; machines differ. Aim for 12–13 controlled reps on the first three and 13–14 on the hip exercises, leaving 2–3 reps in reserve. Choose the nearest lighter available setting and adjust to actual performance. Existing logged weights take priority.
+- Trial starting loads (machine stack labels): leg press 70 lb; seated leg curl 40 lb; ab crunch 40 lb; hip abduction and adduction 40 lb each. These are adjustable starting suggestions, not demographic strength averages; machines differ. Aim for 12–13 controlled reps on the first three and 13–14 on the hip exercises, leaving 2–3 reps in reserve. Choose the nearest lighter available setting and adjust to actual performance. Existing logged weights take priority.
 - The rest timer retains the original app's behavior, including rest after the final set, and can be extended, shortened, or skipped.
 
 ## Install on iPhone
