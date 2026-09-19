@@ -48,6 +48,7 @@ import {
 import { archiveStaleSessions } from "../lib/day-rollover";
 import { exerciseHistoryRows } from "../lib/history";
 import { localDateKey, millisecondsUntilNextLocalMidnight, toLocalIso } from "../lib/local-date";
+import { reconcileActiveWorkoutPlans } from "../lib/session-repair";
 import { restUpdateAfterSet } from "../lib/rest";
 import { defaultStartingWeight } from "../lib/starting-weight";
 import { activeSessionsForLocalDay } from "../lib/today-sessions";
@@ -1117,6 +1118,7 @@ export default function WorkoutApp() {
   const startingWorkoutRef = useRef(false);
 
   const refresh = useCallback(async () => {
+    await reconcileActiveWorkoutPlans(db);
     const [nextExercises, nextSessions, nextStates, nextSets, nextSettings] =
       await Promise.all([
         db.exercises.toArray(),

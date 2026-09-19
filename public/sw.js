@@ -1,4 +1,4 @@
-const CACHE_VERSION = "agym-workout-shell-v2";
+const CACHE_VERSION = "agym-workout-shell-v3";
 // This app owns only its own scope and cache namespace.
 const APP_SHELL_URL = new URL("./", self.registration.scope).toString();
 const appAssetUrl = (path) => new URL(path, self.registration.scope).toString();
