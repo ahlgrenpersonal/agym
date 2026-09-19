@@ -21,13 +21,13 @@ describe("AGym schedule and independence", () => {
   expect(defaultStartingWeight("lb")).toBeUndefined();
   expect(defaultStartingWeight("kg")).toBeUndefined();
  });
- it("cannot import John's backups, and resetting AGym leaves another database untouched", async () => {
+ it("cannot import the original app's backups, and resetting AGym leaves another database untouched", async () => {
   const agym = new WorkoutDatabase("isolation-agym");
-  const john = new WorkoutDatabase("isolation-john");
+  const original = new WorkoutDatabase("isolation-original");
   try {
-   await ensureDefaults(agym); await ensureDefaults(john);
+   await ensureDefaults(agym); await ensureDefaults(original);
    const session = {id:"keep",workoutType:"monday" as const,status:"active" as const,startTimestamp:100,exerciseOrder:["leg_press"]};
-   await john.sessions.add(session);
+   await original.sessions.add(session);
    await agym.sessions.add({...session,id:"agym"});
    const backup=await createBackup(agym);
    expect(backup.format).toBe("agym-workout-backup");
@@ -37,8 +37,8 @@ describe("AGym schedule and independence", () => {
    expect(await agym.sessions.get("agym")).toBeTruthy();
    await resetAllData(agym);
    expect(await agym.sessions.count()).toBe(0);
-   expect(await john.sessions.get("keep")).toEqual(session);
-  } finally {await agym.delete();await john.delete();}
+   expect(await original.sessions.get("keep")).toEqual(session);
+  } finally {await agym.delete();await original.delete();}
  });
  it("has its own install URL, scope, purple identity, and real machine assets", () => {
   const m=JSON.parse(readFileSync("public/manifest.webmanifest","utf8"));
@@ -51,7 +51,7 @@ describe("AGym schedule and independence", () => {
    expect(readFileSync("public/"+f).length).toBeGreaterThan(1000);
   }
  });
- it("service-worker activation deletes only obsolete AGym caches and ignores John's URLs",async () => {
+ it("service-worker activation deletes only obsolete AGym caches and ignores the original app's URLs",async () => {
   const listeners: Record<string,(event:unknown)=>void> = {};
   const deleted: string[]=[];
   let pending: Promise<unknown> | undefined;
