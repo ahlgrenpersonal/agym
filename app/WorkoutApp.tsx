@@ -244,7 +244,7 @@ function HomeScreen({
         <summary>Starting guide · warm-up &amp; progression</summary>
         <p>Warm up for 3–4 minutes, including an easy practice set. Ask staff to check the machine settings.</p>
         <p>First week: use 1–2 working sets per exercise. Adjust target sets in Settings before starting, then build toward the full plan.</p>
-        <p>When every set reaches 15 controlled reps with 2–3 more possible, consider the smallest available weight increase. You choose the load.</p>
+        <p>When every set reaches 15 full, controlled reps, consider the smallest available weight increase next workout. Keep the movement clean; you choose the load.</p>
       </details>
       <div className="workout-picker">
         {ACTIVE_WORKOUT_TYPES.map((type, index) => {
@@ -433,7 +433,7 @@ export function WorkoutScreen({
             <div className="exercise-coaching">
               <strong>{EXERCISE_GUIDANCE[current.exerciseId].muscles}</strong>
               <p>{EXERCISE_GUIDANCE[current.exerciseId].cue}</p>
-              <p>Leave 2–3 good reps in reserve. Add rest whenever you need it.</p>
+              <p>Work to your last good rep. Stop when another full rep would require swinging, shortening the movement, or changing body position. You do not need to attempt a failed rep. Stop for sharp or joint pain. Add rest whenever you need it.</p>
             </div>
           ) : null}
           <div className="prescription">
@@ -466,7 +466,7 @@ export function WorkoutScreen({
               </span>
             ) : weightSuggestionSource === "starting_weight" ? (
               <span>
-                Trial load, not a strength target. Aim for {current.minReps === 12 ? "13–14" : "12–13"} controlled reps with 2–3 left in reserve. Use the nearest lighter machine setting. If form breaks or you cannot reach the rep range, lower it; if 15 is easy, increase one small step. Log the actual load and reps.
+                Adjust this trial load so your last good rep falls around {current.minReps}–{current.maxReps} reps. Stop before form breaks; lower the load if you cannot reach the range. If 15 is easy, increase one small step next time. Log the actual load and reps.
               </span>
             ) : weightSuggestionSource === "program_update" ? (
               <span>
@@ -475,7 +475,7 @@ export function WorkoutScreen({
               </span>
             ) : (
               <span>
-                Choose a comfortable starting load with gym staff. Enter the weight shown on the machine; leave 2–3 good reps in reserve.
+                Choose a starting load with gym staff. Enter the weight shown on the machine. Work to your last good rep, stopping before another rep would require losing form.
               </span>
             )}
           </div>
