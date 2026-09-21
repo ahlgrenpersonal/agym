@@ -46,11 +46,18 @@ export async function ensureDefaults(database: WorkoutDatabase = db): Promise<vo
       if (missing.length) {
         await database.exercises.bulkAdd(missing.map((item) => ({ ...item })));
       }
-      // Move only current exercise assignments; preserve custom loads, sets, rests, and historical sessions.
+      // Apply new program loads once; preserve later customizations and all historical sessions.
       for (const planned of DEFAULT_EXERCISES) {
         const current = await database.exercises.get(planned.id);
-        if (current && (current.defaultWeightLb === undefined || current.defaultWeightLb === PREVIOUS_TRIAL_WEIGHTS[planned.id]) && planned.defaultWeightLb !== undefined) {
-          await database.exercises.update(planned.id, { defaultWeightLb: planned.defaultWeightLb });
+        const hasNewProgramLoad = planned.defaultWeightEffectiveLocalDate !== undefined &&
+          (!current?.defaultWeightEffectiveLocalDate || current.defaultWeightEffectiveLocalDate < planned.defaultWeightEffectiveLocalDate);
+        if (current && planned.defaultWeightLb !== undefined &&
+            (hasNewProgramLoad || current.defaultWeightLb === undefined ||
+             (!current.defaultWeightEffectiveLocalDate && current.defaultWeightLb === PREVIOUS_TRIAL_WEIGHTS[planned.id]))) {
+          await database.exercises.update(planned.id, {
+            defaultWeightLb: planned.defaultWeightLb,
+            ...(planned.defaultWeightEffectiveLocalDate ? { defaultWeightEffectiveLocalDate: planned.defaultWeightEffectiveLocalDate } : {}),
+          });
         }
         if (current && (current.workoutType !== planned.workoutType || current.order !== planned.order)) {
           await database.exercises.update(planned.id, { workoutType: planned.workoutType, order: planned.order });

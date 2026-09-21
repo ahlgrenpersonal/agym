@@ -62,7 +62,8 @@ export const RETIRED_EXERCISE_IDS: readonly string[] = [];
 export const DEFAULT_EXERCISES: ExerciseDefinition[] = [
   {
     "id": "leg_press",
-    "defaultWeightLb": 70,
+    "defaultWeightLb": 100,
+    "defaultWeightEffectiveLocalDate": "2026-09-22",
     "workoutType": "monday",
     "order": 0,
     "name": "Leg Press",
@@ -75,7 +76,8 @@ export const DEFAULT_EXERCISES: ExerciseDefinition[] = [
   },
   {
     "id": "seated_leg_curl",
-    "defaultWeightLb": 40,
+    "defaultWeightLb": 50,
+    "defaultWeightEffectiveLocalDate": "2026-09-22",
     "workoutType": "monday",
     "order": 1,
     "name": "Seated Leg Curl",
