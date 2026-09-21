@@ -44,8 +44,9 @@ it("upgrades the previous trial defaults on existing installations", async () =>
   await ensureDefaults(db);
   expect(await db.exercises.get("leg_press")).toMatchObject({defaultWeightLb:100});
   expect(await db.exercises.get("seated_leg_curl")).toMatchObject({defaultWeightLb:50});
-  for (const id of ["abdominal_crunch_machine","hip_abduction","hip_adduction"]) {
-   expect(await db.exercises.get(id)).toMatchObject({defaultWeightLb:40});
+  expect(await db.exercises.get("abdominal_crunch_machine")).toMatchObject({defaultWeightLb:40});
+  for (const id of ["hip_abduction","hip_adduction"]) {
+   expect(await db.exercises.get(id)).toMatchObject({defaultWeightLb:50});
   }
  } finally { await db.delete(); }
 });

@@ -103,7 +103,8 @@ export const DEFAULT_EXERCISES: ExerciseDefinition[] = [
   },
   {
     "id": "hip_abduction",
-    "defaultWeightLb": 40,
+    "defaultWeightLb": 50,
+    "defaultWeightEffectiveLocalDate": "2026-09-22",
     "workoutType": "thursday",
     "order": 1,
     "name": "Outer Hips · Knees Apart",
@@ -116,7 +117,8 @@ export const DEFAULT_EXERCISES: ExerciseDefinition[] = [
   },
   {
     "id": "hip_adduction",
-    "defaultWeightLb": 40,
+    "defaultWeightLb": 50,
+    "defaultWeightEffectiveLocalDate": "2026-09-22",
     "workoutType": "thursday",
     "order": 2,
     "name": "Inner Thighs · Knees Together",
