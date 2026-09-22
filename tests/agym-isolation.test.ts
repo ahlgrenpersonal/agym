@@ -73,7 +73,7 @@ describe("AGym schedule and independence", () => {
   runInNewContext(readFileSync("public/sw.js","utf8"),{
    URL,Response,
    self:{registration:{scope:"https://example.com/agym/"},location:{origin:"https://example.com"},addEventListener:(name:string,cb:(event:unknown)=>void)=>{listeners[name]=cb;},clients:{claim:async()=>{}},skipWaiting:()=>{}},
-   caches:{keys:async()=>["workout-shell-v23","unrelated-cache","agym-workout-shell-v0","agym-workout-shell-v9"],delete:async(key:string)=>{deleted.push(key);return true;}}
+   caches:{keys:async()=>["workout-shell-v23","unrelated-cache","agym-workout-shell-v0","agym-workout-shell-v10"],delete:async(key:string)=>{deleted.push(key);return true;}}
   });
   listeners.activate({waitUntil:(promise:Promise<unknown>)=>{pending=promise;}});
   await pending;

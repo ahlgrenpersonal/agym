@@ -570,7 +570,7 @@ function summarizeExercise(records: SetRecord[], unit: WeightUnit): string {
   if (sameWeight) {
     return `${weights[0]} ${unit} → ${sorted
       .map((record) => record.actualReps)
-      .join(" / ")}`;
+      .join(" · ")}`;
   }
   return sorted
     .map((record, index) => `${weights[index]} ${unit} × ${record.actualReps}`)
