@@ -76,6 +76,8 @@ export const DEFAULT_EXERCISES: ExerciseDefinition[] = [
   },
   {
     "id": "seated_leg_curl",
+    "routineRevision": "split-curls-abs-v1",
+    "additionalWorkoutOrders": { "thursday": 3 },
     "defaultWeightLb": 50,
     "defaultWeightEffectiveLocalDate": "2026-09-22",
     "workoutType": "monday",
@@ -83,20 +85,22 @@ export const DEFAULT_EXERCISES: ExerciseDefinition[] = [
     "name": "Seated Leg Curl",
     "minReps": 10,
     "maxReps": 15,
-    "targetSets": 4,
+    "targetSets": 2,
     "restSeconds": 90,
     "incrementLb": 5,
     "imageKey": "seated_leg_curl"
   },
   {
     "id": "abdominal_crunch_machine",
+    "routineRevision": "split-curls-abs-v1",
+    "additionalWorkoutOrders": { "monday": 2 },
     "defaultWeightLb": 40,
     "workoutType": "thursday",
     "order": 0,
     "name": "Ab Crunch",
     "minReps": 10,
     "maxReps": 15,
-    "targetSets": 4,
+    "targetSets": 2,
     "restSeconds": 90,
     "incrementLb": 5,
     "imageKey": "abdominal_crunch_machine"

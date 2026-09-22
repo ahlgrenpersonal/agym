@@ -49,6 +49,13 @@ export async function ensureDefaults(database: WorkoutDatabase = db): Promise<vo
       // Apply new program loads once; preserve later customizations and all historical sessions.
       for (const planned of DEFAULT_EXERCISES) {
         const current = await database.exercises.get(planned.id);
+        if (current && planned.routineRevision && current.routineRevision !== planned.routineRevision) {
+          await database.exercises.update(planned.id, {
+            targetSets: planned.targetSets,
+            additionalWorkoutOrders: planned.additionalWorkoutOrders,
+            routineRevision: planned.routineRevision,
+          });
+        }
         const hasNewProgramLoad = planned.defaultWeightEffectiveLocalDate !== undefined &&
           (!current?.defaultWeightEffectiveLocalDate || current.defaultWeightEffectiveLocalDate < planned.defaultWeightEffectiveLocalDate);
         if (current && planned.defaultWeightLb !== undefined &&

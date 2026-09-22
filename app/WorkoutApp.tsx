@@ -1321,6 +1321,7 @@ export default function WorkoutApp() {
         minReps: exercise.minReps,
         maxReps: exercise.maxReps,
         targetSets: exercise.targetSets,
+        routineRevision: exercise.routineRevision,
         restSeconds: exercise.restSeconds,
         incrementLb: exercise.incrementLb,
         imageKey: exercise.imageKey,

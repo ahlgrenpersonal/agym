@@ -47,6 +47,7 @@ export interface ExerciseDefinition {
   restSeconds: number;
   incrementLb: number;
   imageKey: string;
+  routineRevision?: string;
   defaultWeightLb?: number;
   defaultWeightEffectiveLocalDate?: string;
 }
@@ -79,6 +80,7 @@ export interface WorkoutExerciseState {
   restSeconds: number;
   incrementLb: number;
   imageKey: string;
+  routineRevision?: string;
   defaultWeightLb?: number;
   defaultWeightEffectiveLocalDate?: string;
 }

@@ -28,8 +28,8 @@ describe("AGym schedule and independence", () => {
  it("provides exactly the agreed routine with no inherited starting loads", () => {
   expect(ACTIVE_WORKOUT_TYPES).toEqual(["monday","thursday"]);
   expect(ACTIVE_WORKOUT_TYPES.map(day => workoutExercises(DEFAULT_EXERCISES,day).map(e=>[e.id,e.targetSets,e.minReps,e.maxReps,e.restSeconds]))).toEqual([
-   [["leg_press",3,10,15,120],["seated_leg_curl",4,10,15,90]],
-   [["abdominal_crunch_machine",4,10,15,90],["hip_abduction",2,12,15,90],["hip_adduction",2,12,15,90]]
+   [["leg_press",3,10,15,120],["seated_leg_curl",2,10,15,90],["abdominal_crunch_machine",2,10,15,90]],
+   [["abdominal_crunch_machine",2,10,15,90],["hip_abduction",2,12,15,90],["hip_adduction",2,12,15,90],["seated_leg_curl",2,10,15,90]]
   ]);
   expect(DEFAULT_EXERCISES.map(e=>e.defaultWeightLb)).toEqual([100,50,40,50,50]);
   expect(defaultStartingWeight("lb")).toBeUndefined();
@@ -73,7 +73,7 @@ describe("AGym schedule and independence", () => {
   runInNewContext(readFileSync("public/sw.js","utf8"),{
    URL,Response,
    self:{registration:{scope:"https://example.com/agym/"},location:{origin:"https://example.com"},addEventListener:(name:string,cb:(event:unknown)=>void)=>{listeners[name]=cb;},clients:{claim:async()=>{}},skipWaiting:()=>{}},
-   caches:{keys:async()=>["workout-shell-v23","unrelated-cache","agym-workout-shell-v0","agym-workout-shell-v8"],delete:async(key:string)=>{deleted.push(key);return true;}}
+   caches:{keys:async()=>["workout-shell-v23","unrelated-cache","agym-workout-shell-v0","agym-workout-shell-v9"],delete:async(key:string)=>{deleted.push(key);return true;}}
   });
   listeners.activate({waitUntil:(promise:Promise<unknown>)=>{pending=promise;}});
   await pending;

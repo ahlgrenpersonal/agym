@@ -10,14 +10,15 @@ export interface RoutinePreset {
 export const ROUTINE_PRESETS: Record<string, RoutinePreset> = {
  agym_two_day: {
   name: "AGym's Two-Day Routine",
-  weeklySummary: "MON · LEGS / THU · ABS + HIPS",
+  weeklySummary: "MON · LEGS + ABS / THU · ABS + HIPS + CURLS",
   workoutTypes: ["monday", "thursday"],
   workouts: {
-   monday: { description: "2 machines · front + back thighs · glutes · 20–25 min", entries: [{exerciseId:"leg_press",station:"leg_press"}, {exerciseId:"seated_leg_curl",station:"seated_leg_curl"}] },
-   thursday: { description: "2 machines · abs + outer hips + inner thighs · 20–25 min", entries: [
+   monday: { description: "3 machines · legs + abs · 20–25 min", entries: [{exerciseId:"leg_press",station:"leg_press"}, {exerciseId:"seated_leg_curl",station:"seated_leg_curl"}, {exerciseId:"abdominal_crunch_machine",station:"abdominal_crunch_machine"}] },
+   thursday: { description: "3 machines · abs + hips + back thighs · 20–25 min", entries: [
     {exerciseId:"abdominal_crunch_machine",station:"abdominal_crunch_machine"},
     {exerciseId:"hip_abduction",station:"hip_abduction_adduction"},
-    {exerciseId:"hip_adduction",station:"hip_abduction_adduction"}
+    {exerciseId:"hip_adduction",station:"hip_abduction_adduction"},
+    {exerciseId:"seated_leg_curl",station:"seated_leg_curl"}
    ] }
   }
  }

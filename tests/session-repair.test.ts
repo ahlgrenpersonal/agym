@@ -44,14 +44,14 @@ describe("resume a workout created before the two-day update", () => {
   expect(await db.exerciseStates.get(press.id)).toEqual(press);
   expect(await db.sets.get(set.id)).toEqual(set);
   expect(await db.sessions.get(session.id)).toEqual({
-    ...session, exerciseOrder: ["leg_press", "seated_leg_curl"],
+    ...session, exerciseOrder: ["leg_press", "seated_leg_curl", "abdominal_crunch_machine"],
   });
   expect(await db.exerciseStates.get(session.id + ":seated_leg_curl")).toMatchObject({
     order: 1, status: "todo", targetSets: 2, restSeconds: 105,
   });
   // A second reload (and overlapping refresh requests) must not add it again.
   await Promise.all([reconcileActiveWorkoutPlans(db, now), reconcileActiveWorkoutPlans(db, now)]);
-  expect(await db.exerciseStates.count()).toBe(2);
+  expect(await db.exerciseStates.count()).toBe(3);
   const states = await db.exerciseStates.toArray();
   expect(completeCurrentExercise(states, press.id).find(s => s.status === "current")?.exerciseId)
     .toBe("seated_leg_curl");
