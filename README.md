@@ -5,7 +5,8 @@ Independent copy of the Workout PWA. Source is self-contained in this folder; no
 ## Schedule
 - Monday: leg press, 3 × 10–15 (rest 120 seconds), then seated leg curl, 2 × 10–15, and ab crunch, 2 × 10–15 (rest 90 seconds for both).
 - Thursday: ab crunch, 2 × 10–15; hip abduction, 2 × 12–15; hip adduction, 2 × 12–15; seated leg curl, 2 × 10–15; rest 90 seconds.
-- Curls and crunches each total four sets per week. Both sessions use three physical machines and take about 20–25 minutes including warm-up and rests. Abduction and adduction share one machine.
+- Friday: seated triceps press, 3 × 10–15 at a trial 40 lb; seated biceps curl, 2 × 10–15 at a trial 20 lb. Rest 90 seconds. Allow 15–20 minutes including a lighter practice set on each machine. Stack weights are for both arms together. The triceps press also involves chest and shoulders.
+- Seated leg curls and crunches each total four sets per week. Monday and Thursday use three physical machines and take about 20–25 minutes including warm-up and rests. Abduction and adduction share one machine.
 - Start with 1–2 working sets per exercise in week one (editable in Settings before starting a workout). Warm up for 3–4 minutes. Work to the last good rep: stop before another full rep would require swinging, shortening the movement, or changing body position. There is no need to attempt a failed rep; stop for sharp or joint pain.
 - Trial starting loads (machine stack labels): leg press 100 lb; seated leg curl 50 lb; ab crunch 40 lb; hip abduction and adduction 50 lb each. These are adjustable starting suggestions, not demographic strength averages; machines differ. Adjust the load so the last good rep falls around the prescribed range (10–15 on the first three, 12–15 on the hip exercises). Choose the nearest lighter available setting and adjust to actual performance. The revised leg press, seated leg curl, hip abduction, and hip adduction loads apply to the first workout from September 22, 2026 onward, overriding older workout suggestions once. Recorded history is unchanged; subsequent sets and workouts copy the actual loads used.
 - The rest timer retains the original app's behavior, including rest after the final set, and can be extended, shortened, or skipped.
@@ -28,7 +29,7 @@ Her app and the original /gym/ app are separate installations.
 | Local development port | 5174 |
 | Production preview port | 4174 |
 
-Backups from the original app are rejected, and vice versa. Reset affects only AGym's database. Service-worker cleanup deletes only AGym's obsolete caches. No original workout records, starting weights, or body measurements are included. Four supplied machine photos are stored locally for offline use.
+Backups from the original app are rejected, and vice versa. Reset affects only AGym's database. Service-worker cleanup deletes only AGym's obsolete caches. No original workout records, starting weights, or body measurements are included. Six supplied machine photos are stored locally for offline use.
 
 Both GitHub Pages URLs share a browser origin: clearing all browser data for that domain can remove both apps' data. This is a browser-wide action, unlike the isolated in-app reset. Export backups regularly; data is local to the device and browser, with no cloud sync.
 

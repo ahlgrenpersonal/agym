@@ -1,4 +1,4 @@
-const CACHE_VERSION = "agym-workout-shell-v10";
+const CACHE_VERSION = "agym-workout-shell-v11";
 // This app owns only its own scope and cache namespace.
 const APP_SHELL_URL = new URL("./", self.registration.scope).toString();
 const appAssetUrl = (path) => new URL(path, self.registration.scope).toString();
@@ -8,6 +8,8 @@ const CORE_ASSETS = [
   "machine-seated-leg-curl.jpg",
   "machine-abdominal-crunch-machine.jpg",
   "machine-hip-abduction-adduction.jpg",
+  "machine-triceps-press.jpg",
+  "machine-biceps-curl.jpg",
   "icon-192.png",
   "icon-512.png",
   "apple-touch-icon.png"

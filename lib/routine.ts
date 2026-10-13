@@ -1,6 +1,6 @@
 
 import type { WorkoutType } from "./models";
-export type StationId = "leg_press" | "seated_leg_curl" | "abdominal_crunch_machine" | "hip_abduction_adduction";
+export type StationId = "leg_press" | "seated_leg_curl" | "abdominal_crunch_machine" | "hip_abduction_adduction" | "triceps_press_machine" | "biceps_curl_machine";
 export interface RoutineEntry { exerciseId: string; station: StationId; targetSets?: number; }
 export interface RoutineWorkout { description: string; entries: readonly RoutineEntry[]; }
 export interface RoutinePreset {
@@ -8,10 +8,10 @@ export interface RoutinePreset {
  workouts: Partial<Record<WorkoutType, RoutineWorkout>>;
 }
 export const ROUTINE_PRESETS: Record<string, RoutinePreset> = {
- agym_two_day: {
-  name: "AGym's Two-Day Routine",
-  weeklySummary: "MON · LEGS + ABS / THU · ABS + HIPS + CURLS",
-  workoutTypes: ["monday", "thursday"],
+ agym_three_day: {
+  name: "AGym's Three-Day Routine",
+  weeklySummary: "MON · LEGS + ABS / THU · ABS + HIPS + CURLS / FRI · ARMS",
+  workoutTypes: ["monday", "thursday", "friday"],
   workouts: {
    monday: { description: "3 machines · legs + abs · 20–25 min", entries: [{exerciseId:"leg_press",station:"leg_press"}, {exerciseId:"seated_leg_curl",station:"seated_leg_curl"}, {exerciseId:"abdominal_crunch_machine",station:"abdominal_crunch_machine"}] },
    thursday: { description: "3 machines · abs + hips + back thighs · 20–25 min", entries: [
@@ -19,12 +19,16 @@ export const ROUTINE_PRESETS: Record<string, RoutinePreset> = {
     {exerciseId:"hip_abduction",station:"hip_abduction_adduction"},
     {exerciseId:"hip_adduction",station:"hip_abduction_adduction"},
     {exerciseId:"seated_leg_curl",station:"seated_leg_curl"}
+   ] },
+   friday: { description: "2 machines · triceps + biceps · 15–20 min", entries: [
+    {exerciseId:"triceps_press_machine",station:"triceps_press_machine"},
+    {exerciseId:"biceps_curl_machine",station:"biceps_curl_machine"}
    ] }
   }
  }
 };
 export type RoutinePresetId = keyof typeof ROUTINE_PRESETS;
-export const ACTIVE_ROUTINE_ID: RoutinePresetId = "agym_two_day";
+export const ACTIVE_ROUTINE_ID: RoutinePresetId = "agym_three_day";
 export const ACTIVE_ROUTINE = ROUTINE_PRESETS[ACTIVE_ROUTINE_ID];
 export const ACTIVE_WORKOUT_TYPES = ACTIVE_ROUTINE.workoutTypes;
 export function routineWorkout(type: WorkoutType): RoutineWorkout | undefined { return ACTIVE_ROUTINE.workouts[type]; }

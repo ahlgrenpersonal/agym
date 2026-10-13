@@ -235,7 +235,7 @@ function HomeScreen({
   return (
     <main className="screen today-home">
       <section className="home-hero">
-        <p className="eyebrow">AGYM · LEGS + ABS</p>
+        <p className="eyebrow">AGYM · LEGS + ABS + ARMS</p>
         <h1>What are we training?</h1>
         <p>Start or resume any workout. Switch any time.</p>
         <p className="weekly-split">{ACTIVE_ROUTINE.weeklySummary}</p>

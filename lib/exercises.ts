@@ -2,6 +2,16 @@ import type { AppSettings, ExerciseDefinition, ImageCrop, WorkoutType } from "./
 import { routineWorkout } from "./routine";
 export const INFOGRAPHIC_SIZE = {width:1368,height:1824} as const;
 export const IMAGE_CROPS: Record<string,ImageCrop> = {
+  triceps_press_machine: {
+    key: "triceps_press_machine", label: "Triceps Press · gym machine photo",
+    x: 65, y: 210, width: 490, height: 1000,
+    asset: "machine-triceps-press.jpg", sourceWidth: 590, sourceHeight: 1280,
+  },
+  biceps_curl_machine: {
+    key: "biceps_curl_machine", label: "Biceps Curl · gym machine photo",
+    x: 130, y: 265, width: 340, height: 765,
+    asset: "machine-biceps-curl.jpg", sourceWidth: 590, sourceHeight: 1280,
+  },
   "leg_press": {
     "key": "leg_press",
     "label": "Leg Press · photo of AGym’s gym machine",
@@ -132,6 +142,18 @@ export const DEFAULT_EXERCISES: ExerciseDefinition[] = [
     "restSeconds": 90,
     "incrementLb": 5,
     "imageKey": "hip_adduction"
+  },
+  {
+    id: "triceps_press_machine", workoutType: "friday", order: 0,
+    name: "Triceps Press", minReps: 10, maxReps: 15, targetSets: 3,
+    restSeconds: 90, incrementLb: 5, imageKey: "triceps_press_machine",
+    defaultWeightLb: 40,
+  },
+  {
+    id: "biceps_curl_machine", workoutType: "friday", order: 1,
+    name: "Biceps Curl", minReps: 10, maxReps: 15, targetSets: 2,
+    restSeconds: 90, incrementLb: 5, imageKey: "biceps_curl_machine",
+    defaultWeightLb: 20,
   }
 ];
 export function exerciseOrderForWorkout(
