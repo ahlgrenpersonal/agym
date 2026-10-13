@@ -22,11 +22,12 @@ it("adds Friday to an existing installation without changing existing definition
   expect(await db.exerciseStates.toArray()).toEqual(before.exerciseStates);
   for (const definition of before.exercises) expect(await db.exercises.get(definition.id)).toEqual(definition);
   expect(workoutExercises(await db.exercises.toArray(), "friday").map(e=>[e.id,e.targetSets,e.defaultWeightLb])).toEqual([
+   ["friday_leg_press",3,100], ["friday_seated_leg_curl",2,50], ["friday_abdominal_crunch_machine",2,40],
    ["triceps_press_machine",3,40], ["biceps_curl_machine",2,20]
   ]);
   // Restoring an older backup must also pick up Friday on initialization.
   await restoreBackup(db,before); await ensureDefaults(db);
-  expect(workoutExercises(await db.exercises.toArray(),"friday")).toHaveLength(2);
+  expect(workoutExercises(await db.exercises.toArray(),"friday")).toHaveLength(5);
   expect(await db.sets.toArray()).toEqual(before.sets);
  } finally { await db.delete(); }
 });

@@ -1,3 +1,4 @@
+import { FRIDAY_EXERCISE_COPIES } from "./exercises";
 
 export const EXERCISE_GUIDANCE: Record<string,{muscles:string;cue:string}> = {
  triceps_press_machine: {muscles:"Back of upper arms (triceps); chest and shoulders assist.",cue:"Adjust the seat for a comfortable range and secure the thigh pad. Press down by straightening your elbows slowly. Keep your torso steady; do not force your shoulders backward."},
@@ -8,3 +9,7 @@ export const EXERCISE_GUIDANCE: Record<string,{muscles:string;cue:string}> = {
  hip_abduction: {muscles:"Side glutes and outer hips (hip abductors).",cue:"Set the pads OUTSIDE your knees. Push your knees APART against the pads, then return slowly. Keep your pelvis still."},
  hip_adduction: {muscles:"Inner thighs (hip adductors).",cue:"Switch the pads to the INSIDE of your knees. Squeeze your knees TOGETHER, then open slowly within a comfortable range."}
 };
+
+for (const [copyId, sourceId] of Object.entries(FRIDAY_EXERCISE_COPIES)) {
+ EXERCISE_GUIDANCE[copyId] = EXERCISE_GUIDANCE[sourceId];
+}

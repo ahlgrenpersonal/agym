@@ -10,7 +10,7 @@ export interface RoutinePreset {
 export const ROUTINE_PRESETS: Record<string, RoutinePreset> = {
  agym_three_day: {
   name: "AGym's Three-Day Routine",
-  weeklySummary: "MON · LEGS + ABS / THU · ABS + HIPS + CURLS / FRI · ARMS",
+  weeklySummary: "MON · LEGS + ABS / THU · ABS + HIPS + CURLS / FRI · LEGS + ABS + ARMS",
   workoutTypes: ["monday", "thursday", "friday"],
   workouts: {
    monday: { description: "3 machines · legs + abs · 20–25 min", entries: [{exerciseId:"leg_press",station:"leg_press"}, {exerciseId:"seated_leg_curl",station:"seated_leg_curl"}, {exerciseId:"abdominal_crunch_machine",station:"abdominal_crunch_machine"}] },
@@ -20,7 +20,10 @@ export const ROUTINE_PRESETS: Record<string, RoutinePreset> = {
     {exerciseId:"hip_adduction",station:"hip_abduction_adduction"},
     {exerciseId:"seated_leg_curl",station:"seated_leg_curl"}
    ] },
-   friday: { description: "2 machines · triceps + biceps · 15–20 min", entries: [
+   friday: { description: "5 machines · legs + abs + arms · 35–45 min", entries: [
+    {exerciseId:"friday_leg_press",station:"leg_press"},
+    {exerciseId:"friday_seated_leg_curl",station:"seated_leg_curl"},
+    {exerciseId:"friday_abdominal_crunch_machine",station:"abdominal_crunch_machine"},
     {exerciseId:"triceps_press_machine",station:"triceps_press_machine"},
     {exerciseId:"biceps_curl_machine",station:"biceps_curl_machine"}
    ] }

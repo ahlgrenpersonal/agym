@@ -1,6 +1,6 @@
 
 import type { WorkoutDatabase } from "./db";
-import { workoutExercises } from "./exercises";
+import { FRIDAY_EXERCISE_COPIES, workoutExercises } from "./exercises";
 import { localDateKey } from "./local-date";
 import type { WorkoutExerciseState } from "./models";
 import { jumpToExercise } from "./queue";
@@ -22,8 +22,10 @@ export async function reconcileActiveWorkoutPlans(
       const definitions = await database.exercises.toArray();
       const active = await database.sessions.where("status").equals("active").toArray();
       for (const session of active) {
-        if ((session.localDate ?? localDateKey(session.startTimestamp)) !== today ||
-            !ACTIVE_WORKOUT_TYPES.includes(session.workoutType)) continue;
+        if (!ACTIVE_WORKOUT_TYPES.includes(session.workoutType)) continue;
+        // Also upgrade older unfinished Friday sessions; completed history is excluded above.
+        if (session.workoutType !== "friday" &&
+            (session.localDate ?? localDateKey(session.startTimestamp)) !== today) continue;
         let existing = await database.exerciseStates.where("sessionId").equals(session.id).toArray();
         const present = new Set(existing.map(state => state.exerciseId));
         const missing = workoutExercises(definitions, session.workoutType)
@@ -69,6 +71,18 @@ export async function reconcileActiveWorkoutPlans(
         });
         await database.exerciseStates.bulkAdd(additions);
         let order = [...existing, ...additions].sort((a, b) => a.order - b.order);
+        if (session.workoutType === "friday" && missing.some(exercise => FRIDAY_EXERCISE_COPIES[exercise.id])) {
+          const plannedIds = workoutExercises(definitions, "friday").map(exercise => exercise.id);
+          const rank = (id: string) => plannedIds.includes(id) ? plannedIds.indexOf(id) : plannedIds.length;
+          order = order.sort((a, b) => rank(a.exerciseId) - rank(b.exerciseId))
+            .map((state, index) => ({ ...state, order: index }));
+          // An untouched arm-only queue should start with the newly prepended legs.
+          // Keep the current exercise and rest timer when work has already begun.
+          if (!recorded.length && !session.activeRestEndTimestamp) {
+            const first = order.find(state => state.status !== "complete" && state.status !== "deferred");
+            if (first) order = jumpToExercise(order, first.id);
+          }
+        }
         if (!order.some(state => state.status === "current")) {
           const next = order.find(state => state.status === "todo") ?? order.find(state => state.status === "deferred");
           if (next) order = jumpToExercise(order, next.id);

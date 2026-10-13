@@ -69,6 +69,12 @@ export const IMAGE_CROPS: Record<string,ImageCrop> = {
   }
 };
 export const RETIRED_EXERCISE_IDS: readonly string[] = [];
+// Distinct IDs keep Friday settings, suggestions, and records independent.
+export const FRIDAY_EXERCISE_COPIES: Readonly<Record<string, string>> = {
+  friday_leg_press: "leg_press",
+  friday_seated_leg_curl: "seated_leg_curl",
+  friday_abdominal_crunch_machine: "abdominal_crunch_machine",
+};
 export const DEFAULT_EXERCISES: ExerciseDefinition[] = [
   {
     "id": "leg_press",
@@ -144,16 +150,31 @@ export const DEFAULT_EXERCISES: ExerciseDefinition[] = [
     "imageKey": "hip_adduction"
   },
   {
-    id: "triceps_press_machine", workoutType: "friday", order: 0,
+    id: "triceps_press_machine", workoutType: "friday", order: 3,
     name: "Triceps Press", minReps: 10, maxReps: 15, targetSets: 3,
     restSeconds: 90, incrementLb: 5, imageKey: "triceps_press_machine",
     defaultWeightLb: 40,
   },
   {
-    id: "biceps_curl_machine", workoutType: "friday", order: 1,
+    id: "biceps_curl_machine", workoutType: "friday", order: 4,
     name: "Biceps Curl", minReps: 10, maxReps: 15, targetSets: 2,
     restSeconds: 90, incrementLb: 5, imageKey: "biceps_curl_machine",
     defaultWeightLb: 20,
+  },
+  {
+    id: "friday_leg_press", workoutType: "friday", order: 0,
+    name: "Leg Press", minReps: 10, maxReps: 15, targetSets: 3,
+    restSeconds: 120, incrementLb: 5, imageKey: "leg_press", defaultWeightLb: 100,
+  },
+  {
+    id: "friday_seated_leg_curl", workoutType: "friday", order: 1,
+    name: "Seated Leg Curl", minReps: 10, maxReps: 15, targetSets: 2,
+    restSeconds: 90, incrementLb: 5, imageKey: "seated_leg_curl", defaultWeightLb: 50,
+  },
+  {
+    id: "friday_abdominal_crunch_machine", workoutType: "friday", order: 2,
+    name: "Ab Crunch", minReps: 10, maxReps: 15, targetSets: 2,
+    restSeconds: 90, incrementLb: 5, imageKey: "abdominal_crunch_machine", defaultWeightLb: 40,
   }
 ];
 export function exerciseOrderForWorkout(

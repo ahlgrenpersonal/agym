@@ -56,7 +56,7 @@ describe("backup export and import", () => {
       actualWeight: 90,
       actualReps: 10,
     });
-    expect(await target.exercises.count()).toBe(7);
+    expect(await target.exercises.count()).toBe(10);
     source.close();
     target.close();
   });
