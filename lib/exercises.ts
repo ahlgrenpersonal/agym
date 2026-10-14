@@ -183,22 +183,22 @@ export const BALANCED_EXERCISE_SOURCES: Readonly<Record<string, string>> = {
  a_ab_crunch: "abdominal_crunch_machine", b_triceps_press: "triceps_press_machine",
  b_ab_crunch: "friday_abdominal_crunch_machine", b_inner_thighs: "hip_adduction",
  b_biceps_curl: "biceps_curl_machine", c_leg_press: "friday_leg_press",
- c_seated_leg_curl: "friday_seated_leg_curl", c_outer_hips: "hip_abduction",
+ c_seated_leg_curl: "friday_seated_leg_curl", c_outer_hips: "hip_abduction", c_biceps_curl: "b_biceps_curl",
 };
 const BALANCED_PLAN: readonly [string, WorkoutType, number, number][] = [
  ["a_leg_press", "day_a", 0, 3], ["a_seated_leg_curl", "day_a", 1, 3], ["a_ab_crunch", "day_a", 2, 3],
  ["b_triceps_press", "day_b", 0, 3], ["b_ab_crunch", "day_b", 1, 3],
- ["b_inner_thighs", "day_b", 2, 2], ["b_biceps_curl", "day_b", 3, 2],
- ["c_leg_press", "day_c", 0, 3], ["c_seated_leg_curl", "day_c", 1, 3], ["c_outer_hips", "day_c", 2, 2],
+ ["b_inner_thighs", "day_b", 2, 2], ["b_biceps_curl", "day_b", 3, 1],
+ ["c_leg_press", "day_c", 0, 3], ["c_seated_leg_curl", "day_c", 1, 3], ["c_outer_hips", "day_c", 2, 2], ["c_biceps_curl", "day_c", 3, 1],
 ];
-export const DEFAULT_EXERCISES: ExerciseDefinition[] = [
- ...LEGACY_EXERCISES,
- ...BALANCED_PLAN.map(([id,workoutType,order,targetSets]) => {
-  const source=LEGACY_EXERCISES.find(e=>e.id===BALANCED_EXERCISE_SOURCES[id])!;
-  return {id,workoutType,order,targetSets,name:source.name,minReps:source.minReps,maxReps:source.maxReps,
-   restSeconds:source.restSeconds,incrementLb:source.incrementLb,imageKey:source.imageKey,defaultWeightLb:source.defaultWeightLb};
- }),
-];
+export const DEFAULT_EXERCISES: ExerciseDefinition[] = [...LEGACY_EXERCISES];
+for (const [id,workoutType,order,targetSets] of BALANCED_PLAN) {
+ const source=DEFAULT_EXERCISES.find(e=>e.id===BALANCED_EXERCISE_SOURCES[id])!;
+ DEFAULT_EXERCISES.push({id,workoutType,order,targetSets,name:source.name,minReps:source.minReps,maxReps:source.maxReps,
+  restSeconds:source.restSeconds,incrementLb:source.incrementLb,imageKey:source.imageKey,defaultWeightLb:source.defaultWeightLb,
+  ...(id === "b_biceps_curl" ? {routineRevision: "split-biceps-b-c-v1"} : {}),
+ });
+}
 export function exerciseOrderForWorkout(
   exercise: ExerciseDefinition,
   workoutType: WorkoutType,

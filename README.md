@@ -5,8 +5,8 @@ Independent copy of the Workout PWA. Source is self-contained in this folder; no
 ## Schedule
 Rotate through Day A, Day B, and Day C; no calendar weekdays are assigned.
 - Day A (9 sets): Leg Press 3 × 10–15; Seated Leg Curl 3 × 10–15; Ab Crunch 3 × 10–15.
-- Day B (10 sets): Triceps Press 3 × 10–15; Ab Crunch 3 × 10–15; Inner Thighs 2 × 12–15; Biceps Curl 2 × 10–15.
-- Day C (8 sets): Leg Press 3 × 10–15; Seated Leg Curl 3 × 10–15; Outer Hips 2 × 12–15.
+- Day B (9 sets): Triceps Press 3 × 10–15; Ab Crunch 3 × 10–15; Inner Thighs 2 × 12–15; Biceps Curl 1 × 10–15.
+- Day C (9 sets): Leg Press 3 × 10–15; Seated Leg Curl 3 × 10–15; Outer Hips 2 × 12–15; Biceps Curl 1 × 10–15.
 - Rest 120 seconds for leg press and 90 seconds for other exercises. Warm up and do an easy practice set. Work to the last good rep, without swinging or shortening the movement; no failed rep is needed. Stop for sharp or joint pain.
 - The weekly totals remain 27 sets: leg press, seated leg curl, and abs each 6; inner thighs and outer hips each 2; triceps 3; biceps 2.
 - New plan entries copy existing weight suggestions once. Later settings and weights stay independent for each day. Fresh-install trial loads: leg press 100 lb, seated leg curl 50 lb, abs 40 lb, hips 50 lb, triceps press 40 lb, biceps curl 20 lb. These are adjustable trials, not strength estimates. Increase by the smallest available step once every set reaches 15 controlled reps.

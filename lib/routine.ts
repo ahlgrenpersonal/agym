@@ -10,7 +10,7 @@ export interface RoutinePreset {
 export const ROUTINE_PRESETS: Record<string, RoutinePreset> = {
  balanced_abc: {
   name: "AGym's Balanced Three-Day Routine",
-  weeklySummary: "DAY A · 9 SETS / DAY B · 10 SETS / DAY C · 8 SETS",
+  weeklySummary: "DAY A · 9 SETS / DAY B · 9 SETS / DAY C · 9 SETS",
   workoutTypes: ["day_a", "day_b", "day_c"],
   workouts: {
    day_a: { description: "3 machines · legs + abs · 9 sets", entries: [
@@ -18,16 +18,17 @@ export const ROUTINE_PRESETS: Record<string, RoutinePreset> = {
     {exerciseId:"a_seated_leg_curl",station:"seated_leg_curl"},
     {exerciseId:"a_ab_crunch",station:"abdominal_crunch_machine"}
    ] },
-   day_b: { description: "4 machines · arms + abs + inner thighs · 10 sets", entries: [
+   day_b: { description: "4 machines · arms + abs + inner thighs · 9 sets", entries: [
     {exerciseId:"b_triceps_press",station:"triceps_press_machine"},
     {exerciseId:"b_ab_crunch",station:"abdominal_crunch_machine"},
     {exerciseId:"b_inner_thighs",station:"hip_abduction_adduction"},
     {exerciseId:"b_biceps_curl",station:"biceps_curl_machine"}
    ] },
-   day_c: { description: "3 machines · legs + outer hips · 8 sets", entries: [
+   day_c: { description: "4 machines · legs + outer hips + biceps · 9 sets", entries: [
     {exerciseId:"c_leg_press",station:"leg_press"},
     {exerciseId:"c_seated_leg_curl",station:"seated_leg_curl"},
-    {exerciseId:"c_outer_hips",station:"hip_abduction_adduction"}
+    {exerciseId:"c_outer_hips",station:"hip_abduction_adduction"},
+    {exerciseId:"c_biceps_curl",station:"biceps_curl_machine"}
    ] }
   }
  },
