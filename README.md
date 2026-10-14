@@ -3,14 +3,16 @@
 Independent copy of the Workout PWA. Source is self-contained in this folder; no imports or build steps refer to the parent app.
 
 ## Schedule
-- Monday: leg press, 3 × 10–15 (rest 120 seconds), then seated leg curl, 2 × 10–15, and ab crunch, 2 × 10–15 (rest 90 seconds for both).
-- Thursday: ab crunch, 2 × 10–15; hip abduction, 2 × 12–15; hip adduction, 2 × 12–15; seated leg curl, 2 × 10–15; rest 90 seconds.
-- Friday: independent copies of Monday’s leg press (3 × 10–15, rest 120 seconds), seated leg curl (2 × 10–15), and ab crunch (2 × 10–15), followed by seated triceps press, 3 × 10–15 at a trial 40 lb; seated biceps curl, 2 × 10–15 at a trial 20 lb. Rest 90 seconds. Allow about 35–45 minutes including warm-up and rests. Stack weights are for both arms together. The triceps press also involves chest and shoulders.
-- Seated leg curls and crunches each total six sets per week. Monday and Thursday use three physical machines and take about 20–25 minutes including warm-up and rests. Abduction and adduction share one machine.
-- Start with 1–2 working sets per exercise in week one (editable in Settings before starting a workout). Warm up for 3–4 minutes. Work to the last good rep: stop before another full rep would require swinging, shortening the movement, or changing body position. There is no need to attempt a failed rep; stop for sharp or joint pain.
-- Trial starting loads (machine stack labels): leg press 100 lb; seated leg curl 50 lb; ab crunch 40 lb; hip abduction and adduction 50 lb each. These are adjustable starting suggestions, not demographic strength averages; machines differ. Adjust the load so the last good rep falls around the prescribed range (10–15 on the first three, 12–15 on the hip exercises). Choose the nearest lighter available setting and adjust to actual performance. The revised leg press, seated leg curl, hip abduction, and hip adduction loads apply to the first workout from September 22, 2026 onward, overriding older workout suggestions once. Recorded history is unchanged; subsequent sets and workouts copy the actual loads used.
-- Friday’s leg/abs exercises have separate IDs, settings, and weight history. On an existing installation they copy Monday’s saved prescription and suggested weights once when created; with no history the starting loads are 100/50/40 lb. Subsequent changes on either day do not affect the other. Unfinished Friday queues gain these exercises before arms; completed history is preserved.
-- The rest timer retains the original app's behavior, including rest after the final set, and can be extended, shortened, or skipped.
+Rotate through Day A, Day B, and Day C; no calendar weekdays are assigned.
+- Day A (9 sets): Leg Press 3 × 10–15; Seated Leg Curl 3 × 10–15; Ab Crunch 3 × 10–15.
+- Day B (10 sets): Triceps Press 3 × 10–15; Ab Crunch 3 × 10–15; Inner Thighs 2 × 12–15; Biceps Curl 2 × 10–15.
+- Day C (8 sets): Leg Press 3 × 10–15; Seated Leg Curl 3 × 10–15; Outer Hips 2 × 12–15.
+- Rest 120 seconds for leg press and 90 seconds for other exercises. Warm up and do an easy practice set. Work to the last good rep, without swinging or shortening the movement; no failed rep is needed. Stop for sharp or joint pain.
+- The weekly totals remain 27 sets: leg press, seated leg curl, and abs each 6; inner thighs and outer hips each 2; triceps 3; biceps 2.
+- New plan entries copy existing weight suggestions once. Later settings and weights stay independent for each day. Fresh-install trial loads: leg press 100 lb, seated leg curl 50 lb, abs 40 lb, hips 50 lb, triceps press 40 lb, biceps curl 20 lb. These are adjustable trials, not strength estimates. Increase by the smallest available step once every set reaches 15 controlled reps.
+- Old weekday workouts keep their names, results, and snapshots in History. Today's unfinished older workouts can still be resumed from the home screen. Existing logs are never rewritten to fit the new routine.
+- The triceps press also involves chest and shoulders. Machine photos and technique cues are available in each exercise.
+- The rest timer persists across reloads and can be extended, shortened, or skipped, including after the final set.
 
 ## Install on iPhone
 URL after enabling GitHub Pages: https://ahlgrenpersonal.github.io/agym/

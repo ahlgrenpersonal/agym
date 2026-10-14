@@ -4,7 +4,7 @@ import { FRIDAY_EXERCISE_COPIES, workoutExercises } from "./exercises";
 import { localDateKey } from "./local-date";
 import type { WorkoutExerciseState } from "./models";
 import { jumpToExercise } from "./queue";
-import { ACTIVE_WORKOUT_TYPES } from "./routine";
+import { routineWorkout } from "./routine";
 
 /**
  * Extend today's unfinished snapshots when the routine gains exercises.
@@ -22,7 +22,7 @@ export async function reconcileActiveWorkoutPlans(
       const definitions = await database.exercises.toArray();
       const active = await database.sessions.where("status").equals("active").toArray();
       for (const session of active) {
-        if (!ACTIVE_WORKOUT_TYPES.includes(session.workoutType)) continue;
+        if (!routineWorkout(session.workoutType)) continue;
         // Also upgrade older unfinished Friday sessions; completed history is excluded above.
         if (session.workoutType !== "friday" &&
             (session.localDate ?? localDateKey(session.startTimestamp)) !== today) continue;

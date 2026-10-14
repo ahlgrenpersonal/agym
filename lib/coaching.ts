@@ -1,4 +1,4 @@
-import { FRIDAY_EXERCISE_COPIES } from "./exercises";
+import { FRIDAY_EXERCISE_COPIES, BALANCED_EXERCISE_SOURCES } from "./exercises";
 
 export const EXERCISE_GUIDANCE: Record<string,{muscles:string;cue:string}> = {
  triceps_press_machine: {muscles:"Back of upper arms (triceps); chest and shoulders assist.",cue:"Adjust the seat for a comfortable range and secure the thigh pad. Press down by straightening your elbows slowly. Keep your torso steady; do not force your shoulders backward."},
@@ -11,5 +11,9 @@ export const EXERCISE_GUIDANCE: Record<string,{muscles:string;cue:string}> = {
 };
 
 for (const [copyId, sourceId] of Object.entries(FRIDAY_EXERCISE_COPIES)) {
+ EXERCISE_GUIDANCE[copyId] = EXERCISE_GUIDANCE[sourceId];
+}
+
+for (const [copyId, sourceId] of Object.entries(BALANCED_EXERCISE_SOURCES)) {
  EXERCISE_GUIDANCE[copyId] = EXERCISE_GUIDANCE[sourceId];
 }

@@ -1,6 +1,6 @@
 
 import Dexie, { type Table } from "dexie";
-import { DEFAULT_EXERCISES, FRIDAY_EXERCISE_COPIES, DEFAULT_SETTINGS, RETIRED_EXERCISE_IDS } from "./exercises";
+import { DEFAULT_EXERCISES, BALANCED_EXERCISE_SOURCES, FRIDAY_EXERCISE_COPIES, DEFAULT_SETTINGS, RETIRED_EXERCISE_IDS } from "./exercises";
 import type { AppSettings, ExerciseDefinition, SetRecord, WorkoutExerciseState, WorkoutSession } from "./models";
 import { fillForwardWeight } from "./weight-fill-forward";
 export const DATABASE_NAME = "agym-workout-tracker";
@@ -45,7 +45,7 @@ export async function ensureDefaults(database: WorkoutDatabase = db): Promise<vo
     async () => {
       await database.exercises.bulkDelete([...RETIRED_EXERCISE_IDS]);
       const existingIds = new Set((await database.exercises.toArray()).map((item) => item.id));
-      const missing = DEFAULT_EXERCISES.filter((item) => !existingIds.has(item.id) && !FRIDAY_EXERCISE_COPIES[item.id]);
+      const missing = DEFAULT_EXERCISES.filter((item) => !existingIds.has(item.id) && !FRIDAY_EXERCISE_COPIES[item.id] && !BALANCED_EXERCISE_SOURCES[item.id]);
       if (missing.length) {
         await database.exercises.bulkAdd(missing.map((item) => ({ ...item })));
       }
@@ -96,6 +96,30 @@ export async function ensureDefaults(database: WorkoutDatabase = db): Promise<vo
         await database.exercises.add({
           ...planned, name: source.name, imageKey: source.imageKey,
           minReps: source.minReps, maxReps: source.maxReps, targetSets: source.targetSets,
+          restSeconds: source.restSeconds, incrementLb: source.incrementLb,
+          defaultWeightLb: suggestion.weight ?? planned.defaultWeightLb,
+        });
+      }
+      // Seed the new calendar-independent plan once, without migrating old logs.
+      // Preserve current names, setup and suggested weights; apply the approved new set counts.
+      for (const [copyId, sourceId] of Object.entries(BALANCED_EXERCISE_SOURCES)) {
+        if (await database.exercises.get(copyId)) continue;
+        const planned = DEFAULT_EXERCISES.find(item => item.id === copyId)!;
+        const source = await database.exercises.get(sourceId);
+        if (!source) { await database.exercises.add({ ...planned }); continue; }
+        const sessions = await database.sessions.toArray();
+        const sets = await database.sets.where("exerciseId").equals(sourceId).toArray();
+        const seedSession: WorkoutSession = {
+          id: "balanced-plan-seed", workoutType: planned.workoutType, status: "active",
+          startTimestamp: Date.now(), exerciseOrder: [],
+        };
+        const suggestion = fillForwardWeight({
+          sessions: [...sessions, seedSession], sets, currentSessionId: seedSession.id,
+          exerciseId: sourceId, displayUnit: "lb", programWeightLb: source.defaultWeightLb,
+          programWeightEffectiveLocalDate: source.defaultWeightEffectiveLocalDate,
+        });
+        await database.exercises.add({
+          ...planned, name: source.name, imageKey: source.imageKey,
           restSeconds: source.restSeconds, incrementLb: source.incrementLb,
           defaultWeightLb: suggestion.weight ?? planned.defaultWeightLb,
         });

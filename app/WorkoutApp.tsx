@@ -84,7 +84,7 @@ function formatDuration(seconds: number): string {
 }
 
 function workoutTypeLabel(type: WorkoutType): string {
-  return type === "legs_abs" ? "LEGS + ABS" : type.toUpperCase();
+  return type === "legs_abs" ? "LEGS + ABS" : type.replaceAll("_", " ").toUpperCase();
 }
 
 function workoutHeading(type: WorkoutType): string {
@@ -237,7 +237,7 @@ function HomeScreen({
       <section className="home-hero">
         <p className="eyebrow">AGYM · LEGS + ABS + ARMS</p>
         <h1>What are we training?</h1>
-        <p>Start or resume any workout. Switch any time.</p>
+        <p>Rotate through Day A, Day B, and Day C on the days that suit you.</p>
         <p className="weekly-split">{ACTIVE_ROUTINE.weeklySummary}</p>
       </section>
       <details className="training-tip">
@@ -278,6 +278,12 @@ function HomeScreen({
           );
         })}
       </div>
+      {activeSessions.filter(session => !ACTIVE_WORKOUT_TYPES.includes(session.workoutType)).map(session => (
+        <button className="workout-choice" key={session.id} onClick={() => onStart(session.workoutType)}>
+          <span>↻</span><span>{workoutTypeLabel(session.workoutType)}</span>
+          <small>PREVIOUS PLAN · Resume unfinished workout</small>
+        </button>
+      ))}
       {latestSession ? (
         <p className="last-workout">
           Last workout: <strong>{workoutTypeLabel(latestSession.workoutType)}</strong> ·{" "}

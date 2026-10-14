@@ -218,10 +218,12 @@ h2 {
   background: #6b3fa0;
 }
 
+.day_a-choice,
 .monday-choice {
   background: var(--navy);
 }
 
+.day_b-choice,
 .thursday-choice {
   background: #6b3fa0;
 }

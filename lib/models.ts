@@ -6,7 +6,9 @@ export const WEEKDAY_WORKOUT_TYPES = [
   "thursday",
   "friday",
 ] as const;
+export const FLEXIBLE_WORKOUT_TYPES = ["day_a", "day_b", "day_c"] as const;
 export const WORKOUT_TYPES = [
+  ...FLEXIBLE_WORKOUT_TYPES,
   ...LEGACY_WORKOUT_TYPES,
   ...WEEKDAY_WORKOUT_TYPES,
 ] as const;
